@@ -14,7 +14,7 @@ root-level claude code settings that apply across all projects.
 - **hooks/** - automation scripts
   - `auto-compact-transcript.sh` - saves transcript before auto-compact
   - `manual-compact-transcript.sh` - saves transcript before manual compact
-  - `save-plan-to-repo.sh` - copies plan files with yaml frontmatter
+  - `save-plan-to-repo.sh` - copies plan files from `~/.claude/` to local repo with yaml frontmatter
 - **skills/** - reusable skill definitions
   - `cli-commands/` - cli tool reference (jq, tree, gh, delta)
   - `ui-skills/` - ui development constraints
@@ -94,3 +94,78 @@ export ENABLE_EXPERIMENTAL_MCP_CLI=false
 | `ENABLE_EXPERIMENTAL_MCP_CLI` | controls experimental mcp cli features |
 
 see `.zshrc` in this repo for reference configuration.
+
+## sound effect hooks
+
+audio notifications for claude code events. uses `afplay` (macos) to play wav files from `.claude/sfx/`.
+
+### available sound files
+
+| file | trigger | purpose |
+|------|---------|---------|
+| `cc-stop.wav` | session ends | indicates claude has stopped responding |
+| `cc-permission.wav` | permission prompt | alerts when tool approval is needed |
+| `cc-idle.wav` | idle prompt | notifies when waiting for user input |
+| `cc-question.wav` | elicitation dialog | plays when claude asks a question |
+| `cc-compact.wav` | auto-compact | signals context window compression |
+| `cc-save-plan.wav` | plan mode exit | confirms plan was copied from `~/.claude/` to local repo `.claude/plans/` |
+
+### hook configuration
+
+defined in `settings.json` under the `hooks` key:
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "afplay $HOME/.claude/sfx/cc-stop.wav" }]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [{ "type": "command", "command": "afplay $HOME/.claude/sfx/cc-permission.wav" }]
+      },
+      {
+        "matcher": "idle_prompt",
+        "hooks": [{ "type": "command", "command": "afplay $HOME/.claude/sfx/cc-idle.wav" }]
+      },
+      {
+        "matcher": "elicitation_dialog",
+        "hooks": [{ "type": "command", "command": "afplay $HOME/.claude/sfx/cc-question.wav" }]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [{ "type": "command", "command": "afplay $HOME/.claude/sfx/cc-compact.wav; $HOME/.claude/hooks/auto-compact-transcript.sh" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [{ "type": "command", "command": "afplay $HOME/.claude/sfx/cc-save-plan.wav; $HOME/.claude/hooks/save-plan-to-repo.sh" }]
+      }
+    ]
+  }
+}
+```
+
+### hook event types
+
+| event | matcher options | description |
+|-------|-----------------|-------------|
+| `Stop` | `""` (empty) | fires when claude stops responding |
+| `Notification` | `permission_prompt`, `idle_prompt`, `elicitation_dialog` | ui notification events |
+| `PreCompact` | `auto`, `manual` | before context compression |
+| `PostToolUse` | tool name (e.g. `ExitPlanMode`) | after specific tool execution |
+
+### customization
+
+to use different sounds or add new hooks:
+
+1. add wav files to `.claude/sfx/`
+2. update `settings.json` hooks section with new command paths
+3. for linux, replace `afplay` with `aplay` or `paplay`
