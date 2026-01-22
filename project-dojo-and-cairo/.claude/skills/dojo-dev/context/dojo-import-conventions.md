@@ -146,29 +146,6 @@ pub mod battle_systems {
 
 4. **No duplication**: Never import same thing at both levels
 
-## Common Fixes
-
-### Fix `crate::` imports
-
-```bash
-# Find all occurrences
-grep -rn "use crate::" src/
-
-# Fix pattern: crate:: -> game::
-```
-
-### Fix doubled module names
-
-```bash
-# Find system modules with wrong naming
-grep -rn "pub mod shop {" src/systems/
-grep -rn "pub mod battle {" src/systems/
-
-# Should be:
-# pub mod shop_systems {
-# pub mod battle_systems {
-```
-
 ## Verification
 
 After fixing imports, verify with:

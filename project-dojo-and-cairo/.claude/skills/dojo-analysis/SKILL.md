@@ -80,8 +80,6 @@ Trigger on user mentions of:
 
 | Context | When to Load |
 |---------|--------------|
-| context/dojo-search-patterns.md | Grep patterns for Dojo code |
-| context/grep-search-examples.md | Real-world search examples |
 | context/sozo-inspect-queries.md | sozo inspect commands |
 
 ## Quick Reference
