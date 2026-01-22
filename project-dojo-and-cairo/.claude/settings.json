@@ -1,0 +1,56 @@
+{
+  "env": {
+    "STARKNET_RPC": "http://localhost:5050",
+    "DOJO_TORII_URL": "http://localhost:8080"
+  },
+  "permissions": {
+    "defaultMode": "",
+    "allow": [
+      "Bash(scarb fmt:*)",
+      "Bash(katana:*)",
+      "Bash(torii:*)",
+      "Bash(sozo inspect:*)",
+      "Bash(sozo execute:*)",
+      "Bash(sozo --profile dev migrate:*)",
+      "Bash(unset DOJO_WORLD_ADDRESS)",
+      "mcp__cairo-coder__assist_with_cairo",
+      "mcp__sensei__dojo_sensei",
+      "WebFetch(domain:book.dojoengine.org)",
+      "Skill(dev-browser:dev-browser)"
+    ],
+    "deny": [
+      "Read(./target/**)",
+      "Read(./docs/archive/*.md)"
+    ],
+    "ask": [
+      "Bash(pkill katana:*)",
+      "Bash(pkill torii:*)",
+      "Bash(killall katana:*)",
+      "Bash(killall torii:*)",
+      "Bash(cargo:*)",
+      "Bash(rustc:*)",
+      "Bash(sozo build:*)",
+      "Read(./Scarb.lock)",
+      "Read(./manifests/**)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/dojo-session-start.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false
+  },
+  "promptSuggestionEnabled": false
+}

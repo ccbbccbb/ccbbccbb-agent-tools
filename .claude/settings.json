@@ -1,0 +1,180 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(bat:*)",
+      "Bash(find:*)",
+      "Bash(fd:*)",
+      "Bash(rg:*)",
+      "Bash(jq:*)",
+      "Bash(sg:*)",
+      "Bash(tree:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(diff:*)",
+      "Bash(lsof:*)",
+      "Bash(ps:*)",
+      "Bash(tail -f:*)",
+      "Bash(wc:*)",
+      "Bash(which:*)",
+      "Bash(bun dev)",
+      "Bash(bun run dev)",
+      "Bash(bun run all:check)",
+      "Bash(bun run format:check)",
+      "Bash(bun run types)",
+      "Bash(bun run lint:check)",
+      "Bash(bun run assist:check)",
+      "Read(*)",
+      "Edit(**/*)",
+      "Write(**/*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue view:*)",
+      "WebFetch",
+      "WebSearch",
+      "mcp__next-devtools-mcp__nextjs_docs",
+      "mcp__next-devtools-mcp__index",
+      "mcp__next-devtools-mcp__call",
+      "mcp__next-devtools-mcp__eval",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "mcp__context7__query-docs"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./.ssh/**)",
+      "Read(~/.ssh/**)",
+      "Bash(source:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(mkfs:*)",
+      "Bash(dd:*)",
+      "Bash(shutdown:*)",
+      "Bash(reboot:*)",
+      "Read(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.config/gh/hosts.yml)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(echo:*)",
+      "Bash(pwd)",
+      "Bash(cp:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(env:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(kill:*)",
+      "Bash(killall node:*)",
+      "Bash(killall bun:*)",
+      "Bash(pkill bun:*)",
+      "Bash(pkill node:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pip:*)",
+      "Bash(chmod:*)",
+      "Bash(curl:*)",
+      "Bash(bun install)",
+      "Bash(bun add:*)",
+      "Bash(bun remove:*)",
+      "Bash(bun build)",
+      "Skill(dev-browser:dev-browser)"
+    ]
+  },
+"hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay $HOME/.claude/sfx/cc-save-plan.wav; $HOME/.claude/hooks/save-plan-to-repo.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay $HOME/.claude/sfx/cc-stop.wav"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay $HOME/.claude/sfx/cc-permission.wav"
+          }
+        ]
+      },
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay $HOME/.claude/sfx/cc-idle.wav"
+          }
+        ]
+      },
+      {
+        "matcher": "elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay $HOME/.claude/sfx/cc-question.wav"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay $HOME/.claude/sfx/cc-compact.wav; $HOME/.claude/hooks/auto-compact-transcript.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "manual",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/manual-compact-transcript.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "ast-grep@ast-grep-marketplace": true,
+    "dev-browser@dev-browser-marketplace": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false
+  },
+  "promptSuggestionEnabled": false
+}
