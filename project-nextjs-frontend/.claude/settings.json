@@ -1,6 +1,6 @@
 {
   "permissions": {
-    "defaultMode": "bypassPermissions",
+    "defaultMode": "acceptEdits",
     "allow": [
       "Skill(dev-browser:dev-browser)",
       "mcp__next-devtools__nextjs_docs",

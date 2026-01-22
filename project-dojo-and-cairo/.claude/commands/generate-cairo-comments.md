@@ -1,7 +1,9 @@
 ---
 description: Generate NatSpec documentation comments for Cairo functions
 argument-hint: <file_path_or_pattern>
-allowed-tools: Read, Edit, Grep, Glob, ast-grep, mcp__cairo-coder__assist_with_cairo
+context: fork
+agent: general-purpose
+allowed-tools: Read, Edit, Grep, Glob, mcp__cairo-coder__assist_with_cairo
 ---
 
 # Generate Cairo Comments

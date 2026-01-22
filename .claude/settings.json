@@ -4,12 +4,7 @@
     "allow": [
       "Bash(ls:*)",
       "Bash(cat:*)",
-      "Bash(bat:*)",
-      "Bash(find:*)",
-      "Bash(fd:*)",
-      "Bash(rg:*)",
       "Bash(jq:*)",
-      "Bash(sg:*)",
       "Bash(tree:*)",
       "Bash(mkdir:*)",
       "Bash(touch:*)",
@@ -168,7 +163,6 @@
     ]
   },
   "enabledPlugins": {
-    "ast-grep@ast-grep-marketplace": true,
     "dev-browser@dev-browser-marketplace": true
   },
   "sandbox": {

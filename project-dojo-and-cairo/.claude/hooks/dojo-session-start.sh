@@ -61,10 +61,10 @@ if [[ -f "$PROJECT_DIR/contracts/.tool-versions" ]] && command -v asdf &> /dev/n
 fi
 
 echo ""
-echo "available skills: dojo-tooling, dojo-analysis, dojo-dev, client-nextjs"
+echo "available skills: dojo-tooling, dojo-analysis, dojo-dev"
 
 echo ""
-echo "available mcp servers: next-devtools, cairo-coder, context7, sensei"
+echo "available mcp servers: cairo-coder, context7, sensei"
 
 echo ""
 echo "if an mcp server is disabled, ask the user to turn it on via the /mcp command"

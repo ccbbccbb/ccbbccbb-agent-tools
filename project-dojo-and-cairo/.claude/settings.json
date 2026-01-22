@@ -4,7 +4,7 @@
     "DOJO_TORII_URL": "http://localhost:8080"
   },
   "permissions": {
-    "defaultMode": "",
+    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(scarb fmt:*)",
       "Bash(katana:*)",

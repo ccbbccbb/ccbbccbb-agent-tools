@@ -144,24 +144,6 @@ grep -rn "assert.*'Session not found'" src/
 grep -rn "panic(" src/
 ```
 
-## Ripgrep (rg) Advanced Patterns
-
-Ripgrep is faster and supports more regex features:
-
-```bash
-# Find functions with multiple parameters
-rg "fn \w+\([^)]+,[^)]+\)" src/
-
-# Find structs with specific field
-rg -A 10 "struct Session" src/ | grep -E "(session_id|player)"
-
-# Find TODO comments
-rg "TODO|FIXME|XXX" src/
-
-# Count occurrences
-rg -c "world.write_model" src/
-```
-
 ## Complex Searches
 
 ### Find Functions That Modify Models

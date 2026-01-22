@@ -1,47 +1,5 @@
 # CLI Tool Reference
 
-## fd (find replacement)
-```bash
-fd pattern              # find files matching pattern
-fd -e tsx               # by extension
-fd -t d                 # directories only
-fd -t f                 # files only
-fd -H                   # include hidden
-fd -I                   # include gitignored
-fd -H -I                # find everything
-fd -x cmd {}            # execute on each result
-fd -X cmd               # execute once with all results
-```
-
-## rg (grep replacement)
-```bash
-rg pattern              # search recursively
-rg -i pattern           # case insensitive
-rg -w pattern           # whole word
-rg -l pattern           # list files only
-rg -c pattern           # count per file
-rg -t js pattern        # filter by type
-rg -g '*.tsx' pattern   # filter by glob
-rg -C 3 pattern         # 3 lines context
-rg --hidden pattern     # include hidden files
-rg -uuu pattern         # search everything
-```
-
-## sg (ast-grep - structural search)
-```bash
-sg -p 'pattern'                    # search pattern
-sg -p 'pattern' -r 'replacement'   # search and replace
-sg -p 'pattern' --lang tsx         # specify language
-sg -p 'pattern' -i                 # interactive mode
-sg -p 'pattern' --json             # JSON output
-sg -p 'pattern' -U                 # apply changes
-```
-
-Pattern syntax:
-- `$NAME` - named metavariable
-- `$_` - anonymous wildcard
-- `$$$` - matches multiple nodes
-
 ## jq (JSON processor)
 ```bash
 jq .                    # pretty print

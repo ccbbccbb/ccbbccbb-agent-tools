@@ -16,7 +16,7 @@ root-level claude code settings that apply across all projects.
   - `manual-compact-transcript.sh` - saves transcript before manual compact
   - `save-plan-to-repo.sh` - copies plan files with yaml frontmatter
 - **skills/** - reusable skill definitions
-  - `cli-commands/` - modern cli tools (rg, fd, sg, jq) for code search
+  - `cli-commands/` - cli tool reference (jq, tree, gh, delta)
   - `ui-skills/` - ui development constraints
 - **commands/** - slash commands
   - `git-catchup.md` - read changed files in current branch

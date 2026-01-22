@@ -1,6 +1,6 @@
 ---
 description: Fix Dojo import conventions and module naming patterns
-allowed-tools: Bash, Grep, Edit, Read, Glob, ast-grep, mcp__cairo-coder__assist_with_cairo
+allowed-tools: Bash, Grep, Edit, Read, Glob, mcp__cairo-coder__assist_with_cairo
 ---
 
 # Fix Imports & Module Conventions
